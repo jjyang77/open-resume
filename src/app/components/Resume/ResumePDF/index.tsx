@@ -49,8 +49,6 @@ export const ResumePDF = ({
   } = settings;
   const themeColor = settings.themeColor || DEFAULT_FONT_COLOR;
 
-  const showFormsOrder = formsOrder.filter((form) => formToShow[form]);
-
   const formTypeToComponent: { [type in ShowForm]: () => JSX.Element } = {
     workExperiences: () => (
       <ResumePDFWorkExperience
@@ -92,6 +90,8 @@ export const ResumePDF = ({
     ),
   };
 
+  const showFormsOrder = formsOrder.filter((form) => formToShow[form] && form !== "projects");
+
   return (
     <>
       <Document title={`${name} Resume`} author={name} producer={"OpenResume"}>
@@ -104,6 +104,7 @@ export const ResumePDF = ({
             fontSize: fontSize + "pt",
           }}
         >
+          {/* Top banner removed - uncomment the section below to restore it
           {Boolean(settings.themeColor) && (
             <View
               style={{
@@ -113,6 +114,7 @@ export const ResumePDF = ({
               }}
             />
           )}
+          */}
           <View
             style={{
               ...styles.flexCol,
@@ -123,6 +125,16 @@ export const ResumePDF = ({
               profile={profile}
               themeColor={themeColor}
               isPDF={isPDF}
+            />
+            {/* Separation line between contact info and work experience */}
+            <View
+              style={{
+                width: spacing["full"],
+                height: "1pt",
+                backgroundColor: "#a2a3a3", // Light gray color
+                marginTop: spacing["4"],
+                marginBottom: spacing["2"],
+              }}
             />
             {showFormsOrder.map((form) => {
               const Component = formTypeToComponent[form];
