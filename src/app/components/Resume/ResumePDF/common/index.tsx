@@ -28,10 +28,10 @@ export const ResumePDFSection = ({
         {themeColor && (
           <View
             style={{
-              height: "3.75pt",
-              width: "30pt",
+              height: "7.5pt",
+              width: "7.5pt",
               backgroundColor: themeColor,
-              marginRight: spacing["3.5"],
+              marginRight: spacing["1.5"],
             }}
             debug={DEBUG_RESUME_PDF_FLAG}
           />

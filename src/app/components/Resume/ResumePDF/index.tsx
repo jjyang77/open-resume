@@ -49,14 +49,13 @@ export const ResumePDF = ({
   } = settings;
   const themeColor = settings.themeColor || DEFAULT_FONT_COLOR;
 
-  const showFormsOrder = formsOrder.filter((form) => formToShow[form]);
-
   const formTypeToComponent: { [type in ShowForm]: () => JSX.Element } = {
     workExperiences: () => (
       <ResumePDFWorkExperience
         heading={formToHeading["workExperiences"]}
         workExperiences={workExperiences}
         themeColor={themeColor}
+        style={{ marginTop: spacing["2"] }}
       />
     ),
     educations: () => (
@@ -92,6 +91,9 @@ export const ResumePDF = ({
     ),
   };
 
+  // Remove projects and educations sections from the resume PDF template
+  const showFormsOrder = formsOrder.filter((form) => formToShow[form] && form !== "projects" && form !== "educations");
+
   return (
     <>
       <Document title={`${name} Resume`} author={name} producer={"OpenResume"}>
@@ -104,6 +106,7 @@ export const ResumePDF = ({
             fontSize: fontSize + "pt",
           }}
         >
+          {/* Top banner removed - uncomment the section below to restore it
           {Boolean(settings.themeColor) && (
             <View
               style={{
@@ -113,16 +116,28 @@ export const ResumePDF = ({
               }}
             />
           )}
+          */}
           <View
             style={{
               ...styles.flexCol,
               padding: `${spacing[0]} ${spacing[20]}`,
+              marginTop: spacing["6"],
             }}
           >
             <ResumePDFProfile
               profile={profile}
               themeColor={themeColor}
               isPDF={isPDF}
+            />
+            {/* Separation line between contact info and work experience */}
+            <View
+              style={{
+                width: spacing["full"],
+                height: "1pt",
+                backgroundColor: "#a2a3a3", // Light gray color
+                marginTop: spacing["2"],
+                marginBottom: spacing["2"],
+              }}
             />
             {showFormsOrder.map((form) => {
               const Component = formTypeToComponent[form];
