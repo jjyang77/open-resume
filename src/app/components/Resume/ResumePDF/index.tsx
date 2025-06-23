@@ -90,7 +90,8 @@ export const ResumePDF = ({
     ),
   };
 
-  const showFormsOrder = formsOrder.filter((form) => formToShow[form] && form !== "projects");
+  // Remove projects and educations sections from the resume PDF template
+  const showFormsOrder = formsOrder.filter((form) => formToShow[form] && form !== "projects" && form !== "educations");
 
   return (
     <>
