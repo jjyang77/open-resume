@@ -121,6 +121,7 @@ export const ResumePDF = ({
             style={{
               ...styles.flexCol,
               padding: `${spacing[0]} ${spacing[20]}`,
+              marginTop: spacing["6"],
             }}
           >
             <ResumePDFProfile
@@ -134,7 +135,7 @@ export const ResumePDF = ({
                 width: spacing["full"],
                 height: "1pt",
                 backgroundColor: "#a2a3a3", // Light gray color
-                marginTop: spacing["4"],
+                marginTop: spacing["2"],
                 marginBottom: spacing["2"],
               }}
             />
