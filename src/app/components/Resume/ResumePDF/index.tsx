@@ -55,6 +55,7 @@ export const ResumePDF = ({
         heading={formToHeading["workExperiences"]}
         workExperiences={workExperiences}
         themeColor={themeColor}
+        style={{ marginTop: spacing["2"] }}
       />
     ),
     educations: () => (
